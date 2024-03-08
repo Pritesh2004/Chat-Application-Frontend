@@ -1,2 +1,84 @@
 <p>home works!</p>
 <button (click)="logOut()">LogOut</button>
+<!-- user-list.component.html -->
+
+<div>
+    <h1>User List</h1>
+    <mat-table [dataSource]="users" >
+      
+  
+      <ng-container matColumnDef="username">
+        <mat-header-cell *matHeaderCellDef>Username</mat-header-cell>
+        <mat-cell *matCellDef="let user" >{{ user.username }}</mat-cell>
+      </ng-container>
+  
+      <ng-container matColumnDef="status">
+        <mat-header-cell *matHeaderCellDef>Status</mat-header-cell>
+        <mat-cell *matCellDef="let user">{{ user.status }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="addFriend">
+        <mat-header-cell *matHeaderCellDef>Add Friend</mat-header-cell>
+        <mat-cell *matCellDef="let user" >
+          
+            <button (click)="sendFriendRequest(user.username)">Add</button>
+        </mat-cell>
+      </ng-container>
+      
+  
+      <!-- Add more columns as needed -->
+  
+      <mat-header-row *matHeaderRowDef="['username', 'status', 'addFriend']"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: ['username', 'status', 'addFriend']"></mat-row>
+    </mat-table>
+  </div>
+
+  <mat-table [dataSource]="friends">
+    <!-- Sender Username Column -->
+    <ng-container matColumnDef="username">
+      <mat-header-cell *matHeaderCellDef>Friends </mat-header-cell>
+      <mat-cell *matCellDef="let friend">{{ friend.username }}</mat-cell>
+    </ng-container>
+  
+  
+  
+    <!-- Reject Button Column -->
+    <ng-container matColumnDef="status">
+      <mat-header-cell *matHeaderCellDef>Status</mat-header-cell>
+      <mat-cell *matCellDef="let friend">{{friend.status}}      </mat-cell>
+    </ng-container>
+  
+    <!-- Define columns to display -->
+    <mat-header-row *matHeaderRowDef="['username', 'status']"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: ['username', 'status']"></mat-row>
+  </mat-table>
+  
+  
+  <mat-table [dataSource]="pendingRequests">
+    <!-- Sender Username Column -->
+    <ng-container matColumnDef="senderUsername">
+      <mat-header-cell *matHeaderCellDef>Sender Username</mat-header-cell>
+      <mat-cell *matCellDef="let request">{{ request.senderUsername }}</mat-cell>
+    </ng-container>
+  
+    <!-- Accept Button Column -->
+    <ng-container matColumnDef="acceptButton">
+      <mat-header-cell *matHeaderCellDef>Accept</mat-header-cell>
+      <mat-cell *matCellDef="let request">
+        <button mat-button (click)="addFriend(request.senderUsername)">Accept</button>
+      </mat-cell>
+    </ng-container>
+  
+    <!-- Reject Button Column -->
+    <ng-container matColumnDef="rejectButton">
+      <mat-header-cell *matHeaderCellDef>Reject</mat-header-cell>
+      <mat-cell *matCellDef="let request">
+        <button mat-button (click)="removeFriendRequest(request.senderUsername)">Reject</button>
+      </mat-cell>
+    </ng-container>
+  
+    <!-- Define columns to display -->
+    <mat-header-row *matHeaderRowDef="['senderUsername', 'acceptButton', 'rejectButton']"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: ['senderUsername', 'acceptButton', 'rejectButton']"></mat-row>
+  </mat-table>
+  

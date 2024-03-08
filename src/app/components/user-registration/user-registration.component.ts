@@ -20,7 +20,6 @@ export class UserRegistrationComponent {
   constructor(private userService: UserService, private router: Router) {}
 
   registerUser(): void {
-    console.log(this.user)
     this.userService.registerUser(this.user).subscribe(
       response => {
         console.log('User registered successfully:', response);

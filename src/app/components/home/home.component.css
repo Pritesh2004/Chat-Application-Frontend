@@ -1,0 +1,44 @@
+/* user-list.component.css */
+
+mat-table {
+    width: 200px;
+    margin-top: 20px;
+  }
+  
+  mat-header-cell, mat-cell {
+    text-align: left;
+    padding: 8px;
+  }
+  
+  mat-header-row, mat-row {
+    background-color: #f2f2f2;
+  }
+  
+  /* Adjust styling as needed */
+  /* friend-list.component.css */
+
+.notifications-container {
+    max-width: 400px;
+    margin: 20px auto;
+    display: flex;
+    flex-direction: column;
+  }
+
+  mat-list{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .requestList{
+    display: flex;
+    flex-direction: row;
+  }
+  
+  mat-list-item {
+    border-bottom: 1px solid #ddd;
+  }
+  
+  mat-list-item:last-child {
+    border-bottom: none;
+  }
+  

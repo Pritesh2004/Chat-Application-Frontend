@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable, catchError } from 'rxjs';
+import { User } from '../components/user.model';
+import { FriendRequest } from '../components/friendRequest.model';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +17,17 @@ export class UserService {
     return this.http.post(`${this.baseUrl}/user/`, user);
   }
 
+  addFriend(request: any): Observable<any> {
+    const url = `${this.baseUrl}/user/addFriend`;
+    return this.http.post(url, request);
+  }
+
+  removeFriendRequest(sUsername: string, rUsername: string): Observable<void> {
+    const url = `${this.baseUrl}/friend/deleteRequest/${sUsername}/${rUsername}`;
+
+    return this.http.delete<void>(url);
+  }
+
   loginUser(user: any): Observable<any> {
     return this.http.post(`${this.baseUrl}/user/login`, user);
   }
@@ -23,9 +36,52 @@ export class UserService {
     return this.http.get(`${this.baseUrl}/user/${username}`);
   }
 
-  updateStatus(username:string , user: any): Observable<any> {
-    return this.http.put(`${this.baseUrl}/user/offline/${username}`, user);
+  updateStatus(username: string): Observable<any> {
+    const updateStatusDto = { username: username };
+
+    return this.http.post(`${this.baseUrl}/user/logout`, updateStatusDto)
+    .pipe(
+      catchError(error => {
+        console.error('Error updating user status:', error);
+        throw error;
+      })
+    );  }
+  
+  getAllUsers(username: string): Observable<User[]> {
+
+    return this.http.get<User[]>(`${this.baseUrl}/user/all/${username}`);
+
   }
+
+  getAllFriends(user_id: any): Observable<User[]> {
+
+    return this.http.get<User[]>(`${this.baseUrl}/user/getFriends/${user_id}`);
+
+  }
+
+  getPendingRequest(username: string): Observable<FriendRequest[]> {
+
+    return this.http.get<FriendRequest[]>(`${this.baseUrl}/friend/pending-requests/${username}`);
+
+  }
+
+  getFriendRequest(sUsername: string, rUsername: string): Observable<any> {
+
+    return this.http.get<any>(`${this.baseUrl}/friend/friendRequest/${sUsername}/${rUsername}`);
+
+  }
+
+  sendFriendRequest(senderUsername: string, receiverUsername: string): Observable<any> {
+    const request = {
+      senderUsername: senderUsername,
+      receiverUsername: receiverUsername,
+    };
+
+
+    return this.http.post<any>(`${this.baseUrl}/friend/send-request`, request);
+  }
+
+
 
 
   isLoggedIn() {
