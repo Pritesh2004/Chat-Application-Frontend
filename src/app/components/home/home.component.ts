@@ -189,7 +189,7 @@ export class HomeComponent implements OnInit {
   logOut() {
     this.updateStatus();
     this.service.logOut();
-    this.router.navigate(['/login']);
+    this.router.navigate(['/']);
 
   }
 }

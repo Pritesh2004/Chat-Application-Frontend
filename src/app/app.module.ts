@@ -11,13 +11,15 @@ import { UserRegistrationComponent } from './components/user-registration/user-r
 import { UserLoginComponent } from './components/user-login/user-login.component';
 import { HomeComponent } from './components/home/home.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { StartingPageComponent } from './components/starting-page/starting-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     UserRegistrationComponent,
     UserLoginComponent,
-    HomeComponent
+    HomeComponent,
+    StartingPageComponent
   ],
   imports: [
     HttpClientModule,

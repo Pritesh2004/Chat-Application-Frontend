@@ -1,15 +1,22 @@
 <!-- user-login.component.html -->
+<div class="login-page">
+  <div class="login-container">
 
-<div class="login-container">
-    <h2>Login</h2>
+    <h2 id="login">LOGIN</h2>
     <form (submit)="loginUser()">
-      <label for="username">Username:</label>
-      <input type="text" id="username" [(ngModel)]="user.username" name="username"quired>
-  
-      <label for="password">Password:</label>
-      <input type="password" id="password" [(ngModel)]="user.password" name="password" required>
-  
+      <input type="text" id="username" [(ngModel)]="user.username" name="username" required placeholder="Username">
+
+      <input type="password" id="password" [(ngModel)]="user.password" name="password" required placeholder="Password">
+      <p id="forgotPassword" >Forgot Password?</p>
       <button type="submit">Login</button>
+      <div id="signup-link-div">
+        <p id="signup-text">Not a member yet?</p>
+        <a id="signup-link" routerLink="/signup">Sign Up</a>
+      </div>
+
     </form>
   </div>
-  
+</div>
+
+
+<!-- <a href="{{url}}" >Sign in with Google</a> -->

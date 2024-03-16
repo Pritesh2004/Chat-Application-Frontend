@@ -1,21 +1,34 @@
 <!-- user-registration.component.html -->
+<div class="signup-page">
 
-<div class="registration-container">
-    <h2>Register</h2>
-    <form (submit)="registerUser()">
-      <label for="username">Username:</label>
-      <input type="text" id="username" [(ngModel)]="user.username" name="username" required>
-  
-      <label for="fullName">Full Name:</label>
-      <input type="text" id="fullName" [(ngModel)]="user.fullName" name="fullName" required>
-  
-      <label for="email">Email:</label>
-      <input type="email" id="email" [(ngModel)]="user.email" name="email" required>
-  
-      <label for="password">Password:</label>
-      <input type="password" id="password" [(ngModel)]="user.password" name="password" required>
-  
+  <div *ngIf="!otpSent" class="signup-container">
+    <p id="signup">SIGNUP</p>
+    <form (submit)="sendOTP(user.email)">
+      <input type="text" id="username" [(ngModel)]="user.username" name="username" required placeholder="Username">
+
+      <input type="text" id="fullName" [(ngModel)]="user.fullName" name="fullName" required placeholder="Full Name">
+
+      <input type="email" id="email" [(ngModel)]="user.email" name="email" required placeholder="Email">
+
+      <input type="password" id="password" [(ngModel)]="user.password" name="password" required placeholder="Password">
+
       <button type="submit">Register</button>
+
+      <div id="login-link-div">
+        <p id="login-text">
+          Already have a account?
+        </p>
+        <a routerLink="/login" id="login-link">Login</a>
+      </div>
     </form>
   </div>
-  
+
+  <div *ngIf="otpSent">
+    <form (submit)="verifyOtp(otp)">
+      <label for="otp">Enter OTP:</label>
+      <input type="text" id="otp" name="otp" required>
+      <button type="submit" >Verify OTP</button>
+    </form>
+  </div>
+
+</div>

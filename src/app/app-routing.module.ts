@@ -4,10 +4,17 @@ import { UserLoginComponent } from './components/user-login/user-login.component
 import { UserRegistrationComponent } from './components/user-registration/user-registration.component';
 import { HomeComponent } from './components/home/home.component';
 import { AuthGuard } from './auth.guard';
+import { StartingPageComponent } from './components/starting-page/starting-page.component';
 
 const routes: Routes = [
 
   
+
+{
+  path:'',
+  component: StartingPageComponent,
+  pathMatch:"full",
+},
 {
   path:'login',
   component: UserLoginComponent,
@@ -16,7 +23,7 @@ const routes: Routes = [
 
   
 {
-  path:'',
+  path:'signup',
   component: UserRegistrationComponent,
   pathMatch:"full",
 },
@@ -25,7 +32,8 @@ const routes: Routes = [
   path:'home',
   component: HomeComponent,
   pathMatch:"full",
-  canActivate: [AuthGuard] 
+  canActivate: [AuthGuard]
+
 },
 
 

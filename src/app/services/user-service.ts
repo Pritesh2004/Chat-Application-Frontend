@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, catchError } from 'rxjs';
+import { Observable, catchError, map } from 'rxjs';
 import { User } from '../components/user.model';
 import { FriendRequest } from '../components/friendRequest.model';
 
@@ -15,6 +15,13 @@ export class UserService {
 
   registerUser(user: any): Observable<any> {
     return this.http.post(`${this.baseUrl}/user/`, user);
+  }
+
+  sendOTP(email: string, otp: string): Observable<any> {
+    const body = { email, otp };
+    const headers = { 'Content-Type': 'application/json' };
+    return this.http.post(`${this.baseUrl}/verify-otp`, body, { responseType: 'text', headers, observe: 'response' })
+      .pipe(map(response => response.body)); // Assuming the response body contains the OTP verification status
   }
 
   addFriend(request: any): Observable<any> {
