@@ -41,6 +41,7 @@ export class UserLoginComponent implements OnInit {
         // Add any additional handling or redirection logic here
       },
       error => {
+        alert("Error logging in")
         console.error('Error logging in:', error);
         // Handle error, display message, etc.
       }

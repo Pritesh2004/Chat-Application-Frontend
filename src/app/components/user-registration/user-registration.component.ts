@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user-service';
 
+
 @Component({
   selector: 'app-user-registration',
   templateUrl: './user-registration.component.html',
@@ -16,16 +17,18 @@ export class UserRegistrationComponent implements OnInit{
     email: '',
     password: ''
     };
-
+    formOtp = {
+      fOtp:'',
+    };
     otp: string = '';
     message: string = '';
-
     otpSent:boolean = false;
 
   constructor(private userService: UserService, private router: Router) {}
 
   ngOnInit(): void {
     this.otp = this.generateOTP();
+    console.log(this.otp, " otp when loaded")
 
   }
 
@@ -45,6 +48,7 @@ export class UserRegistrationComponent implements OnInit{
 
           this.message = response;
           console.log(this.message)
+          console.log(this.otp," otp when sent")
           this.otpSent=true;
         },
         error => {
@@ -55,9 +59,10 @@ export class UserRegistrationComponent implements OnInit{
       );
   }
 
-  verifyOtp(otp:string){
-
-    if(otp == this.otp){
+  verifyOtp(formOtp:string){
+    console.log(formOtp," otp in form")
+    console.log(this.otp, " otp from email")
+    if(formOtp === this.otp){
       console.log(this.user)
       this.registerUser();
     }
