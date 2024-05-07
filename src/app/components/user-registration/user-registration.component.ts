@@ -49,6 +49,7 @@ export class UserRegistrationComponent implements OnInit{
           this.message = response;
           console.log(this.message)
           console.log(this.otp," otp when sent")
+          alert("Otp Sent to your email")
           this.otpSent=true;
         },
         error => {
@@ -75,7 +76,9 @@ export class UserRegistrationComponent implements OnInit{
     this.userService.registerUser(this.user).subscribe(
       response => {
         console.log('User registered successfully:', response);
+        alert("Registration Successfull")
         this.router.navigate(['login'])
+
         // Add any additional handling or redirection logic here
       },
       error => {
